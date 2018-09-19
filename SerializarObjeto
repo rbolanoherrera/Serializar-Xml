@@ -1,0 +1,24 @@
+
+/// <summary>
+/// Convertir cualquier objeto generico en Xml
+/// </summary>
+/// <param name="entity"></param>
+/// <returns>string</returns>
+public string SerializarObjeto(object entity)
+{
+    string strObject = string.Empty;
+
+    System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(entity.GetType());
+    using (StringWriter textWriter = new StringWriter())
+    {
+        xmlSerializer.Serialize(textWriter, entity);
+        strObject = textWriter.ToString();
+    }
+
+    return strObject;
+}
+
+
+// como utilizarla
+this.SerializarObjeto(new Persona() { Nombre="Rafael", Apellidos="Bolaños", Email="rbolanoherrera@gmail.com"});
+
